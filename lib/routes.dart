@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:nba/data/post_api_service.dart';
 import 'package:flutter/material.dart';
+import 'package:nba/screen/scr_ga.dart';
 import 'package:nba/screen/scr_home.dart';
 import 'package:nba/screen/screen_splash.dart';
 import 'package:nba/utils/navigation_service.dart';
@@ -56,7 +57,7 @@ class MyApp extends StatefulWidget {
 class MyAppState extends State<MyApp> {
   ThemeMode _themeMode = ThemeMode.system;
   final routes = <String, WidgetBuilder>{
-    '/home': (context) => const HomeScreen(),
+    '/home': (context) => const HomeScreen(0),
   };
 
   void changeTheme(ThemeMode themeMode) {

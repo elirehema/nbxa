@@ -39,9 +39,9 @@ class SplashScreenState extends State<SplashScreen> {
       backgroundColor: Colors.white,
       body:  Center(
         child:  Image.asset(
-          'assets/images/red_icon.png',
-          width: 104.0,
-          height: 104.0,
+          'assets/images/vodacom.png',
+          width: 80.0,
+          height: 80.0,
           fit: BoxFit.fill,
         ),
       ),
