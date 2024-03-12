@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 Color colorPrimary = const Color.fromRGBO(172,60,68,1);
-Color colorPrimaryDark = const Color.fromRGBO(152,128,170, 1.0);
+Color colorPrimaryDark = const Color.fromRGBO(58, 20, 22, 1.0);
 Color colorAccent = const Color.fromRGBO(234, 234, 234, 1.0);
 Color scaffoldBackgroundColor = const Color.fromRGBO(226,224,224, 1.0);
 Color darkScaffoldBackgroundColor = const Color.fromRGBO(24, 24, 24, 1.0);
@@ -17,4 +17,4 @@ Color roundedBorder = const Color.fromRGBO(232,34,47, 1);
 Color firstLine = const Color.fromRGBO(123,191,201, 1.0);
 Color secondLine = const Color.fromRGBO(224,205,121, 1.0);
 Color thirdLine = const Color.fromRGBO(216,132,124, 1.0);
-List<Color> pallets = <Color>[firstLine, secondLine, thirdLine];
+List<Color> pallets = <Color>[Colors.blue,firstLine, secondLine, thirdLine];

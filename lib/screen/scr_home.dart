@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         titleSpacing: 4,
         title:  Transform.translate(
-            offset: Offset(-50.0, 0.0),
+            offset: const Offset(-50.0, 0.0),
             child: GestureDetector(
               child: Container(
                 width: 45,
@@ -55,10 +55,10 @@ class HomeScreen extends StatelessWidget {
               child: InkWell(
                 onTap: (){
                   Navigator.pop(context);
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen(0)),);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen(0)),);
                 },
                 child: Container(
-                  padding: EdgeInsets.only(left: 15.0, top: 30, bottom: 10),
+                  padding: const EdgeInsets.only(left: 15.0, top: 30, bottom: 10),
                   child: const Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,24 +107,24 @@ class HomeScreen extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.workspaces),
-                  title: Text('Workflow'),
+                  leading: const Icon(Icons.workspaces),
+                  title: const Text('Workflow'),
                   onTap: (){},
                 ),
                 ListTile(
-                  leading: Icon(Icons.update),
-                  title: Text('Updates'),
+                  leading: const Icon(Icons.update),
+                  title: const Text('Updates'),
                   onTap: (){},
                 ),
                 const Divider(color: Colors.black45,),
                 ListTile(
-                  leading: Icon(Icons.account_tree_outlined),
-                  title: Text('Plugins'),
+                  leading: const Icon(Icons.account_tree_outlined),
+                  title: const Text('Plugins'),
                   onTap: (){},
                 ),
                 ListTile(
-                  leading: Icon(Icons.notifications_outlined),
-                  title: Text('Notifications'),
+                  leading: const Icon(Icons.notifications_outlined),
+                  title: const Text('Notifications'),
                   onTap: (){},
                 ),
               ],
