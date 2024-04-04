@@ -57,7 +57,7 @@ class MyApp extends StatefulWidget {
 class MyAppState extends State<MyApp> {
   ThemeMode _themeMode = ThemeMode.system;
   final routes = <String, WidgetBuilder>{
-    '/home': (context) => const HomeScreen(0),
+    '/home': (context) =>  HomeScreen(0),
   };
 
   void changeTheme(ThemeMode themeMode) {

@@ -11,5 +11,5 @@ class Constants{
   static const String HTTP_BASE_URL = 'eppg.ngazi.co.tz';
   static const String BASE_URL = "egsaving-gateway/app-internal";
   static NumberFormat currencyFormat = NumberFormat("###,###.00#", "en_US");
-
 }
+enum NotificationTypes { status,action,bolt,smooth,error,success }

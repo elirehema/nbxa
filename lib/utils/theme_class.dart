@@ -78,7 +78,7 @@ class ThemeClass {
         trackColor: MaterialStateProperty.all(Colors.grey),
         thumbColor: MaterialStateProperty.all(red),
       ),
-      iconTheme: IconThemeData(color: red));
+      iconTheme: const IconThemeData(color: Colors.white));
 
   /* Dark theme settings */
   static ThemeData darkTheme = ThemeData(
