@@ -18,15 +18,15 @@ final class _$PostApiService extends PostApiService {
   final Type definitionType = PostApiService;
 
   @override
-  Future<Response<dynamic>> updateUserProfile(String body) {
-    final Uri $url = Uri.parse('/loggeduser');
-    final $body = body;
+  Future<Response<GAResponse>> getGADataByRange(String msisdn) {
+    final Uri $url = Uri.parse('/subscribers');
+    final Map<String, dynamic> $params = <String, dynamic>{'msisdn': msisdn};
     final Request $request = Request(
-      'PUT',
+      'GET',
       $url,
       client.baseUrl,
-      body: $body,
+      parameters: $params,
     );
-    return client.send<dynamic, dynamic>($request);
+    return client.send<GAResponse, GAResponse>($request);
   }
 }

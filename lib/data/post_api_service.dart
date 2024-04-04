@@ -1,6 +1,5 @@
 
 import 'package:chopper/chopper.dart';
-import 'package:flutter/foundation.dart';
 import 'package:nba/data/ClientRequestInterceptor.dart';
 import 'package:nba/data/ClientResponseInterceptor.dart';
 import 'package:nba/data/built_value_converter.dart.dart';
@@ -16,14 +15,16 @@ if (dart.library.html) 'package:nba/utils/httpclients/http_client_web.dart'
 // ignore: uri_does_not_exist
 if (dart.library.io) 'package:nba/utils/httpclients/http_client_nonweb.dart';
 
+import '../model/index.dart';
+
 
 
 part 'post_api_service.chopper.dart';
 
 @ChopperApi()
 abstract class PostApiService extends ChopperService {
-  @Put(path: '/loggeduser')
-  Future<Response> updateUserProfile(@Body() String body);
+  @Get(path: '/subscribers')
+  Future<Response<GAResponse>> getGADataByRange(@Query("msisdn") String msisdn);
 
 
   static PostApiService create() {

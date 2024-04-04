@@ -1,31 +1,36 @@
+import 'package:chopper/chopper.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:nba/model/index.dart';
+import 'package:nba/model/m_ga_data.dart';
+import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:built_collection/built_collection.dart';
+import '../data/post_api_service.dart';
+import '../widgets/w_not_found.dart';
+import '../widgets/w_something_wrong.dart';
 
 class ChartData {
-  ChartData(
-      this.month,
-      this.firstSale,
-      this.secondSale,
-      this.thirdSale
-      );
+  ChartData(this.month, this.firstSale, this.secondSale, this.thirdSale);
 
   final String month;
   final double firstSale;
   final double secondSale;
   final double thirdSale;
 }
+
 class GrossAddScreen extends StatefulWidget {
   const GrossAddScreen({super.key});
 
   @override
   GrossAddScreenState createState() => GrossAddScreenState();
 }
+
 class GrossAddScreenState extends State<GrossAddScreen> {
   bool showAlert = true;
   late TrackballBehavior _trackballBehavior;
   late List<ChartData> data;
-  List<ChartData> hourlyData =  <ChartData>[
+  List<ChartData> hourlyData = <ChartData>[
     ChartData('8AM', 1, 39, 60),
     ChartData('9AM', 9, 30, 55),
     ChartData('10AM', 11, 28, 48),
@@ -64,22 +69,18 @@ class GrossAddScreenState extends State<GrossAddScreen> {
     ChartData('Sun', 24, 45, 57),
   ];
 
-
-
   @override
   void initState() {
-    data =  hourlyData;
+    data = hourlyData;
     _trackballBehavior = TrackballBehavior(
-        enable: true,
-        tooltipDisplayMode: TrackballDisplayMode.groupAllPoints
-    );
+        enable: true, tooltipDisplayMode: TrackballDisplayMode.groupAllPoints);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    return  Column(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -91,44 +92,55 @@ class GrossAddScreenState extends State<GrossAddScreen> {
             decoration: BoxDecoration(
                 color: Colors.red[200],
                 borderRadius: BorderRadius.circular(5.0),
-                border: Border.all(color: Colors.transparent)
-            ),
-            child:  const ListTile(
+                border: Border.all(color: Colors.transparent)),
+            child: const ListTile(
               dense: true,
-              leading:  Icon(Icons.info, color: Colors.black),
-              subtitle:  Text("Your Gross Add G/A is below the your monthly average.Increase your registration to increase your G/A. Thanks",
+              leading: Icon(Icons.info, color: Colors.black),
+              subtitle: Text(
+                "Your Gross Add G/A is below the your monthly average.Increase your registration to increase your G/A. Thanks",
                 style: TextStyle(color: Colors.black),
-                textAlign: TextAlign.justify,),
-
+                textAlign: TextAlign.justify,
+              ),
             ),
-          ),),
+          ),
+        ),
         Card(
-          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all( Radius.circular(5.0))),
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(5.0))),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-
               ListTile(
                   tileColor: theme.primaryColor,
                   dense: true,
-                  title: const Text('Registration and G/A', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
-                  subtitle: const Text('Registration and Daily Gross Add\'s ',style: TextStyle(color: Colors.white)),
+                  title: const Text(
+                    'Registration and G/A',
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: const Text('Registration and Daily Gross Add\'s ',
+                      style: TextStyle(color: Colors.white)),
                   trailing: PopupMenuButton<int>(
                     color: Colors.white,
                     padding: const EdgeInsets.all(0.0),
-                    icon: const Icon(Icons.filter_list_outlined, color: Colors.white,),
+                    icon: const Icon(
+                      Icons.filter_list_outlined,
+                      color: Colors.white,
+                    ),
                     itemBuilder: (BuildContext context) =>
-                    <PopupMenuEntry<int>>[
+                        <PopupMenuEntry<int>>[
                       PopupMenuItem(
                         value: 1,
                         child: ListTile(
                           dense: true,
-                          title:Text('menu.hourly'.tr()),
+                          title: Text('menu.hourly'.tr()),
                           leading: const Icon(Icons.watch_later_outlined),
                         ),
                       ),
-                      const PopupMenuDivider(height: 0.0,),
+                      const PopupMenuDivider(
+                        height: 0.0,
+                      ),
                       PopupMenuItem(
                         value: 2,
                         child: ListTile(
@@ -137,19 +149,18 @@ class GrossAddScreenState extends State<GrossAddScreen> {
                           leading: const Icon(Icons.calendar_view_week),
                         ),
                       ),
-
-                      const PopupMenuDivider( height: 0,),
+                      const PopupMenuDivider(
+                        height: 0,
+                      ),
                       PopupMenuItem(
                           value: 3,
                           child: ListTile(
                             dense: true,
                             title: Text('menu.monthly'.tr()),
                             leading: const Icon(Icons.calendar_month),
-                          )
-                      )
+                          ))
                     ],
                     onSelected: (int value) {
-
                       setState(() {
                         showAlert = !showAlert;
                       });
@@ -171,18 +182,16 @@ class GrossAddScreenState extends State<GrossAddScreen> {
                           break;
                       }
                     },
-                  )
-              ),
+                  )),
               _cartesianChart()
             ],
           ),
-
         )
       ],
     );
   }
 
-  Widget _cartesianChart(){
+  Widget _cartesianChart() {
     return SfCartesianChart(
         primaryXAxis: const CategoryAxis(),
         trackballBehavior: _trackballBehavior,
@@ -208,7 +217,58 @@ class GrossAddScreenState extends State<GrossAddScreen> {
             xValueMapper: (ChartData sales, _) => sales.month,
             yValueMapper: (ChartData sales, _) => sales.thirdSale,
           )
-        ]
+        ]);
+  }
+
+  FutureBuilder<Response<GAResponse>> _futureBody(
+      BuildContext context) {
+    return FutureBuilder<Response<GAResponse>>(
+      future: Provider.of<PostApiService>(context).getGADataByRange("255758101949"),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          GAResponse? response = snapshot.data?.body;
+          if (response!.datas.isEmpty) {
+            return const NothingFoundWarning(message: 'no_loan',);
+          } else if (snapshot.hasError) {
+            return const SomethingWrongHasHappened();
+          } else {
+            final BuiltList<GAData>  datas = response.datas;
+
+            List<GAData> gaDataList = datas.asList as List<GAData>;
+            List<ChartData> chartDatas = gaDataList.map((e) => ChartData('${e.gaDate}', e.regCount, e.gaCount, 0)).toList();
+            return SfCartesianChart(
+                primaryXAxis: const CategoryAxis(),
+                trackballBehavior: _trackballBehavior,
+                series: <LineSeries<ChartData, String>>[
+                  LineSeries<ChartData, String>(
+                    dataSource: chartDatas,
+                    markerSettings: const MarkerSettings(isVisible: true),
+                    name: 'Registrations',
+                    xValueMapper: (ChartData sales, _) => sales.month,
+                    yValueMapper: (ChartData sales, _) => sales.firstSale,
+                  ),
+                  LineSeries<ChartData, String>(
+                    dataSource: chartDatas,
+                    markerSettings: const MarkerSettings(isVisible: true),
+                    name: 'Gross Add (GA)',
+                    xValueMapper: (ChartData sales, _) => sales.month,
+                    yValueMapper: (ChartData sales, _) => sales.secondSale,
+                  ),
+                  LineSeries<ChartData, String>(
+                    dataSource: chartDatas,
+                    markerSettings: const MarkerSettings(isVisible: true),
+                    name: 'Activators',
+                    xValueMapper: (ChartData sales, _) => sales.month,
+                    yValueMapper: (ChartData sales, _) => sales.thirdSale,
+                  )
+                ]);
+          }
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      },
     );
   }
 }

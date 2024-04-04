@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nba/widgets/w_alert_action.dart';
-import 'package:nba/widgets/w_alert_bolt.dart';
-import 'package:nba/widgets/w_alert_smooth.dart';
 
 import '../scr_ga.dart';
 
